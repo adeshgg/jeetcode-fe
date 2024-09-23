@@ -72,7 +72,9 @@ export async function POST(request: NextRequest) {
       { headers: { Authorization: `token ${token}` } }
     )
 
-    return NextResponse.json({ message: 'File uploaded successfully!' })
+    return NextResponse.json({
+      message: `File uploaded successfully @ https://github.com/${owner}/${repo}/blob/${branch}/${fileName}`,
+    })
   } catch (error) {
     console.error('Error uploading file:', error)
     return NextResponse.json(
