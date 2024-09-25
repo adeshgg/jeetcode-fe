@@ -72,8 +72,16 @@ export async function POST(request: NextRequest) {
       { headers: { Authorization: `token ${token}` } }
     )
 
+    const createProblemResponse = await axios.post(
+      `${process.env.BACKEND_URI}/problems`,
+      {
+        name: fileName,
+        link: `https://github.com/${owner}/${repo}/blob/${branch}/${fileName}`,
+      }
+    )
+
     return NextResponse.json({
-      message: `File uploaded successfully @ https://github.com/${owner}/${repo}/blob/${branch}/${fileName}`,
+      message: 'File uploaded successfully',
     })
   } catch (error) {
     console.error('Error uploading file:', error)

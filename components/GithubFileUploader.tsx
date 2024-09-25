@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone'
 import axios from 'axios'
 
 interface GitHubFileUploaderProps {
+  fileName: string
   owner: string
   repo: string
   branch?: string
@@ -18,6 +19,7 @@ interface FileStatus {
 }
 
 const GitHubFileUploader: React.FC<GitHubFileUploaderProps> = ({
+  fileName,
   owner,
   repo,
   branch = 'main',
@@ -46,7 +48,7 @@ const GitHubFileUploader: React.FC<GitHubFileUploaderProps> = ({
           const response = await axios.post(
             '/api/upload-to-github',
             {
-              fileName: file.name,
+              fileName: fileName,
               content,
               owner,
               repo,
